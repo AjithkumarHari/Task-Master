@@ -1,0 +1,48 @@
+<nav class="flex   justify-between w-auto py-5 px-20">
+    <div class="flex items-center ml-10">
+        <h1 class="text-white text-3xl font-semibold  hidden sm:block uppercase">Task Master</h1>
+    </div>
+  
+    <div>
+        <select name="name"  id="user" class="text-2xl w-28 text-end  text-white gap-3 bg-transparent outline-none" (change)="onSelectionChange($event)">
+            <option hidden class="bg-gray-900 text-end" value="user">Ajith</option>
+            <option class="bg-gray-900 text-xl  rounded-md text-center"  value="logout">Log out</option>
+            <option class="bg-gray-900 text-xl rounded-md text-center" value="profile">Profile</option>
+        </select>
+    </div>
+
+    <div class="sm:hidden mr-10">
+        <button type="button"  
+             
+            class=" w-10 h-10 flex justify-center items-center text-sm font-semibold rounded-lg border-2   disabled:opacity-50 disabled:pointer-events-none "
+             >
+            <svg class=" w-5 h-5 " width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
+    </div>
+    
+</nav>
+<div   
+    class="p-5 w-full font-sans text-white ml-10 sm:hidden">
+    <ul class="text-2xl ">
+        <li><a class=" p-2.5" routerLink="/">Home</a> </li>
+        <li><a class="  p-2.5" routerLink="/services">Services</a></li>
+        <li><a class="p-2.5" routerLink="/workerList">Workers</a></li>
+        <li><a class="p-2.5" routerLink="/profile/newBooking">Profile</a></li>
+    </ul>
+    <div class="p-3">
+        <button  
+            class="px-4 py-1 text-lg text-white rounded border-2 border-white hover:bg-[#6f1d1b]"
+           >
+            Logout
+        </button>
+        <ng-template #loginSignup>
+            <button class="px-4 py-1 text-lg mr-3 text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]"
+                routerLink="/auth/login">Login</button>
+            <button class="px-4 py-1 text-lg text-white rounded bg-[#a53521] hover:bg-[#6f1d1b]"
+                routerLink="/auth/signup">Signup</button>
+        </ng-template>
+    </div>
+</div>
