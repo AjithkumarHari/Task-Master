@@ -1,4 +1,13 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { take } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth-service.service';
+import { signupRequest } from 'src/app/state/login/login.action';
+import { selectErrorMessage } from 'src/app/state/login/login.selector';
+import { UserState } from 'src/app/state/user.state';
+import { User } from 'src/app/types/User';
 
 @Component({
   selector: 'app-signup',
@@ -6,5 +15,43 @@ import { Component } from '@angular/core';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+  errorMessage: any = " "
+  form !: FormGroup;
+  loggedIn!: boolean;
 
+  constructor( 
+    private formBuilder : FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<UserState>,
+  ) { }
+
+  ngOnInit(): void {
+
+    this.form = this.formBuilder.group({
+      name: new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z]{3,15}$")]),
+      email : new FormControl(null, [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z.-]+\.[a-z]{2,4}$")]),
+      password : new FormControl(null, [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}")]),
+      confpassword: new FormControl(null, [Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}")]),
+    })
+  }
+
+  onFormSubmit(){
+    const user : User ={
+      name : this.form.value.name,
+      email : this.form.value.email,
+      password : this.form.value.password,
+    }
+     console.log(user);
+
+      // this.authService.signup(user).subscribe((data: any)=>console.log(data));
+
+      
+      this.store.dispatch(signupRequest({user}));
+      this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
+        this.errorMessage = error;
+      });
+     
+    
+  }
 }

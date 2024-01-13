@@ -1,5 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './state/login/login.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './state/login/login.effects';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,8 +25,12 @@ import { ProfileComponent } from './components/profile/profile.component';
     ProfileComponent
   ],
   imports: [
+    HttpClientModule ,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot({ auth : authReducer }),
+    EffectsModule.forRoot(AuthEffects)
   ],
   providers: [],
   bootstrap: [AppComponent]

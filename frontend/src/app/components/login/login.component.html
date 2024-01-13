@@ -3,35 +3,47 @@
         <h1 class="text-center font-semibold text-2xl">Log In</h1>
        
         <div class="mx-7">
-            <form class="">
+            <form [formGroup]="form" (ngSubmit)="onFormSubmit()" >
                 <div class='grid gap-4 mt-7'>
                     <div> 
                         <div class="relative">
                             <input type="text" id="floating_outlined_1" 
-                          
+                            formControlName="email"
                             class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
-                            
+                            [ngClass]="{
+                                ' border-red-500': form.get('email')?.invalid && form.get('email')?.touched,
+                                'border-green-600': !form.get('email')?.invalid && !form.get('email')?.touched
+                            }"
                             />
                             <label for="floating_outlined_1" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                             
-                            >e-mail</label>
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            [ngClass]="{
+                                'text-red-600': form.get('email')?.invalid && form.get('email')?.touched,
+                                'text-green-600 ': !form.get('email')?.invalid && !form.get('email')?.touched,
+                            }"  
+                            >E-mail</label>
                         </div>
-                        <!-- <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p> -->
+                        <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid.</p>
                     </div>
                     <div> 
                         <div class="relative">
-                            <input type="text" id="floating_outlined_1" 
-                          
+                            <input type="password" id="floating_outlined_2" 
+                            formControlName="password"
                             class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
-                            
+                            [ngClass]="{
+                                ' border-red-500': form.get('password')?.invalid && form.get('password')?.touched,
+                                'border-green-600': !form.get('password')?.invalid && !form.get('password')?.touched
+                            }"
                             />
-                            <label for="floating_outlined_1" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-0 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                             
+                            <label for="floating_outlined_2" 
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            [ngClass]="{
+                                'text-red-600': form.get('password')?.invalid && form.get('password')?.touched,
+                                'text-green-600 ': !form.get('password')?.invalid && !form.get('password')?.touched,
+                            }"
                             >Password</label>
                         </div>
-                        <!-- <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p> -->
+                        <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>password must be valid.</p>
                     </div>
                     <p class="text-center  text-sm  ">Are you new to this site? <a routerLink="/signup"  class="font-semibold text-yellow-950">Click Here</a></p>
                     <div >
