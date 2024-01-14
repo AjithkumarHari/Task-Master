@@ -14,7 +14,8 @@ const userShcema = new Schema(
             type : String,
             require : true
         },
-    }
+    },
+    { timestamps : true}
 )
 
 const USER = model("User", userShcema, "users");

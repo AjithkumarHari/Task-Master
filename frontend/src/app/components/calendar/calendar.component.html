@@ -1,0 +1,55 @@
+<div class="  mt-7 ">
+    <div class="flex justify-center   pt-5">
+        <div class="bg-gray-100 rounded-lg shadow py-4 px-7 w-11/12  "  >
+           <div class="flex justify-between items-center mb-2">
+               <div>
+                   <span class="text-4xl font-bold text-gray-800">{{MONTH_NAMES[month]}}</span>
+                   <span class="ml-1 text-2xl text-gray-600 font-normal">{{year}}</span>
+               </div>
+               <div>
+                   <button type="button"
+                       class="transition ease-in-out inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                       (click)="changeMonth(-1)">
+                       <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                       </svg>
+                   </button>
+                   <button type="button"
+                           class="transition ease-in-out inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                           (click)="changeMonth(1)">
+                       <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                       </svg>
+                   </button>
+               </div>
+           </div>
+   
+           <div class="flex flex-wrap mb-7 -mx-1">
+               <ng-container *ngFor="let day of DAYS; let index = index">
+                   <div style="width: 14.26%" class="px-1">
+                       <div class="text-gray-800 font-medium text-center text-lg">
+                           {{ day }}
+                       </div>
+                   </div>
+               </ng-container>
+           </div>
+   
+           <div class="flex flex-wrap m-2">
+               <ng-container *ngFor="let blankday of blankdays">
+                   <div style="width: 14.28%" class="text-center border-none p-1 border-transparent text-sm"></div>
+               </ng-container>
+               <ng-container *ngFor=" let date of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
+                   <div style="width: 14.28%" class=" px-3 py-1">
+                       <div (click)="getDateValue(date)"
+                      
+                       class="cursor-pointer text-center text-black text-xl rounded-xl leading-loose transition ease-in-out duration-100">
+                           {{ date }}
+                       </div>
+                   </div>
+               </ng-container>
+           </div>
+       </div>
+       
+    </div>
+</div>
+<!-- appDate [date]="date" [year]="year" [month]="month" [booking]="bookings"  [blockedDates]="blockedDates" [selectedDate]="selectedDate" -->

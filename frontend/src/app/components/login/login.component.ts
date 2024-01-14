@@ -20,7 +20,7 @@ export class LoginComponent {
   constructor(private formBuilder : FormBuilder,
     private authService: AuthService,
     private store: Store<UserState>,
-    ){}
+  ){}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({

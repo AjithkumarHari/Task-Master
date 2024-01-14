@@ -12,6 +12,6 @@ export const selectToken = createSelector(
 ) 
 
 export const selectUserData = createSelector(
-    (state: any) => state.userData,
+    (state: any) => state.user.userData,
     (userData) => userData
 ) 
