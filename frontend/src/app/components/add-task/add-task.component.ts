@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { take } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
-import { UserState } from 'src/app/state/user.state';
 import { Task } from 'src/app/types/Task';
 
 @Component({
@@ -15,6 +14,7 @@ export class AddTaskComponent {
   @Input() date!: Date;
   @Input() userId!: string;
   @Output() onCancel : EventEmitter<Date> = new EventEmitter<Date>();
+  @Output() onCreated : EventEmitter<string> = new EventEmitter<string>();
 
   constructor( private userService: UserService){}
 
@@ -23,15 +23,12 @@ export class AddTaskComponent {
   }
 
   onSubmitNewTask(){
-   
     const task: Task = {
       userId: this.userId,
       content: this.newTask,
       date: this.date 
     } 
-    console.log(task);
-    this.userService.addTask(task).subscribe()
-    this.onCancel.emit()
+    this.userService.addTask(task).pipe(take(1)).subscribe(()=>this.onCreated.emit());
   }
 
 }

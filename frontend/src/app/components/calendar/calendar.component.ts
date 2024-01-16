@@ -30,8 +30,6 @@ export class CalendarComponent {
 
   @Input() tasks!: any[];
   @Output() onAddTask : EventEmitter<Date> = new EventEmitter<Date>();
-  @Output() onDeleteTask : EventEmitter<Date> = new EventEmitter<Date>();
-  @Output() onShowTask : EventEmitter<Date> = new EventEmitter<Date>();
 
   constructor( ){}
   
@@ -78,26 +76,8 @@ export class CalendarComponent {
   }
 
 
-  // isBooked(date: any) {
-  //   const d = new Date(this.year, this.month, date);
-  //   d.setHours(0, 0, 0, 0);
-  //   const result = this.bookings.some((details) => {
-  //     const newDate = new Date(details.bookingTime);
-  //     newDate.setHours(0, 0, 0, 0);
-  //     return newDate.getTime() === d.getTime();
-  //   });
-  //   return result;
-  // }
-
-
   getDateValue(date: any): void {
     this.selectedDate = new Date(this.year, this.month, date);
-    // if(this.isBooked(date)){
-      this.onAddTask.emit(this.selectedDate)
-    // }else{
-      
-    //   this.onBlockBooking.emit(this.selectedDate)
-    // }
-    
+    this.onAddTask.emit(this.selectedDate)
   }
 }

@@ -1,38 +1,72 @@
-<div class=" rounded-xl border bg-white px-6  pt-2  text-gray-900 mx-10">
-    <div  *ngIf="tasks!=[]; else noBooking">
-       <p class="text-lg font-bold pb-3">To-Do List</p>
-     
-       <ul class=" divide-y divide-gray-200 ">
-          <li class="pb-3 sm:pb-4" *ngFor="let task of tasks | slice:0:3">
-             <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                <div class="flex-shrink-0">
-                   <img class="w-8 h-8 rounded-full" src="" alt="Neil image">
-                </div>
-                <div class=" flex justify-between w-full">
-                   <div class="flex min-w-0">
-                      <p class="text-sm font-medium text-gray-900 truncate  ">
-                         {{task.content}}
-                      </p>
-                      <p *ngIf="tasks!=[]; else notDone" class="text-sm pl-5 text-gray-500 truncate  ">
-                         Done
-                      </p>
-                      <ng-template #notDone>
-                          <p class="text-sm pl-5 text-gray-500 truncate  ">
-                            Not Done
-                          </p>
-                      </ng-template>
-                   </div>
-                   <div class="inline-flex pl-20 items-end text-base font-semibold text-gray-900  ">
-                      on {{ task.date | dateString}}
-                   </div>
-                </div>
-               
-             </div>
-          </li>
-       </ul>
-    </div>
- 
-    <ng-template #noBooking>
-       <p class="text-lg font-semibold py-10">No New Bookings...</p>
-    </ng-template>
+ <div class=" rounded-xl border bg-white px-6 pt-2  text-gray-900 mx-10" *ngIf="count; else noTasks">
+   <div >
+      <p class="text-lg font-bold"><i class="fa-solid fa-list-check px-2"></i>To-Do List</p>
+      <ul class=" divide-y divide-gray-200 ">
+         <li class="pb-3 sm:py-3 " *ngFor="let task of tasks| slice: currentPage * 7 - 7 : currentPage * 7">
+            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+               <div class=" flex justify-between items-center w-full">
+                  <div class="flex min-w-0 items-center">
+                     <p class="text-sm font-medium text-gray-900 truncate  ">
+                        {{task.content}}
+                     </p>
+                     <p *ngIf="task.isDone; else notDone" class="text-xs ml-1 px-1 rounded-sm border border-gray-400 text-gray-500 truncate  ">
+                        Done
+                     </p>
+                     <ng-template #notDone>
+                        <p class="text-xs ml-1 px-1 rounded-sm border border-gray-400 text-gray-500 truncate  ">
+                           Not Done
+                        </p>
+                     </ng-template>
+                  </div>
+                  <div class="inline-flex whitespace-nowrap items-end text-base font-semibold text-gray-900">
+                     on {{ task.date | dateString}}
+                  </div>
+                  <div class="flex gap-2">
+                     <div class="bg-gray-900 text-white py-1 px-2 rounded-lg" *ngIf="!task.isDone; else reDo" (click)="onUpdate(task._id)">
+                        <i class="fa-solid fa-check"></i>
+                     </div>
+                     <ng-template #reDo>
+                        <div class="bg-gray-900 text-white py-1 px-2 rounded-lg" (click)="onUpdate(task._id)">
+                           <i class="fa-solid fa-repeat"></i>
+                        </div>
+                     </ng-template>
+                     <div class=" bg-gray-900 text-white  py-1 px-2 rounded-lg" (click)="onEdit(task)">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                     </div>
+                     <div class=" bg-gray-900 text-white  py-1 px-2 rounded-lg" (click)="onDelete(task._id)">
+                        <i class="fa-solid fa-trash"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </li>
+      </ul>
+   </div>
+   
+   
+
+   <div *ngIf="tasks.length>7">
+      <nav class="flex justify-center mb-2" aria-label="Page navigation example">
+         <ul class="inline-flex items-center -space-x-px text-base h-10">
+            <li>
+               <a (click)="onPrevious($event)"
+                  class="flex items-center justify-center mr-5 px-3 h-9 ms-0 leading-tight text-gray-500 bg-white border border-gray-500 rounded-full hover:bg-blue-50 hover:text-blue-900">
+                  <i class="fa-solid fa-arrow-left"></i>
+               </a>
+            </li>
+            <li>
+               <a (click)="onNext($event)"
+               class="flex items-center justify-center px-3 h-9 ms-0 leading-tight text-gray-500 bg-white border border-gray-500 rounded-full hover:bg-blue-50 hover:text-blue-900">
+                  <i class="fa-solid fa-arrow-right"></i>
+               </a>
+            </li>
+         </ul>
+      </nav>
+   </div>
 </div>
+<ng-template #noTasks>
+   <div class="w-full h-full flex justify-center items-center">
+      <p class="text-4xl font-admin text-white py-10">You Have No New Task...</p>
+   </div>
+</ng-template>
+ 

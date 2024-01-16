@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './state/login/login.reducer';
@@ -19,6 +19,11 @@ import { DateDirective } from './directives/date.directive';
 import { DateStringPipe } from './pipes/date-string.pipe';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
+import { UserAuthInterceptor } from './interceptors/user-auth.interceptor';
+import { GlobalErrorHanlderService } from './services/global-error-hanlder.service';
+import { NotFoundErrorComponent } from './components/not-found-error/not-found-error.component';
+import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,10 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     DateDirective,
     DateStringPipe,
     AddTaskComponent,
-    TaskListComponent
+    TaskListComponent,
+    NotFoundErrorComponent,
+    InternalServerErrorComponent,
+    EditTaskComponent
   ],
   imports: [
     HttpClientModule ,
@@ -43,7 +51,14 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     StoreModule.forRoot({ user : authReducer }),
     EffectsModule.forRoot(AuthEffects)
   ],
-  providers: [],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHanlderService },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : UserAuthInterceptor,
+      multi : true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

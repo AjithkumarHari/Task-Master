@@ -1,19 +1,17 @@
 <app-navbar></app-navbar>
 <div class="grid grid-cols-2">
-    <app-calendar (onAddTask)="addTask($event)" (onShowTask)="showTask($event)"></app-calendar>   
+    <app-calendar (onAddTask)="addTask($event)"></app-calendar>   
     <div>
         <div class=" flex justify-center items-center">
-            <div *ngIf="show">
-                <h1>show</h1>
-            </div>
             <div *ngIf="add">
-                <app-add-task [date]="date" [userId]="userId" (onCancel)="cancel()"></app-add-task>
+                <app-add-task [date]="date" [userId]="userId" (onCancel)="cancelAddBox()" (onCreated)="afterAddTask()"></app-add-task>
             </div>
-            <div *ngIf="delete">
-                <h1>delete</h1>
+            <div *ngIf="edit">
+                <app-edit-task [task]="taskForEdit" (onCancel)="cancelEditBox()" (onCreated)="afterEditTask()"></app-edit-task>
             </div>
+
         </div>  
-        <app-task-list [tasks]="tasks"></app-task-list>
+        <app-task-list [tasks]="tasks" [count]="tasks.length" (onDeleteTask)="deleteTask($event)" (onUpdateTask)="updateTask($event)" (onEditTask)="editTask($event)"></app-task-list>
     </div>      
 </div>
 <router-outlet></router-outlet>

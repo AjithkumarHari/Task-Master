@@ -1,4 +1,4 @@
-<div class="  mt-7 ">
+<div class="   ">
     <div class="flex justify-center   pt-5">
         <div class="bg-gray-100 rounded-lg shadow py-4 px-7 w-11/12  "  >
            <div class="flex justify-between items-center mb-2">
@@ -41,8 +41,8 @@
                <ng-container *ngFor=" let date of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
                    <div style="width: 14.28%" class=" px-3 py-1">
                        <div (click)="getDateValue(date)"
-                      
-                       class="cursor-pointer text-center text-black text-xl rounded-xl leading-loose transition ease-in-out duration-100">
+                       appDate [date]="date" [year]="year" [month]="month" [tasks]="tasks" [selectedDate]="selectedDate"
+                       class="cursor-pointer py-1 text-center text-black text-xl rounded-xl leading-loose transition ease-in-out duration-100">
                            {{ date }}
                        </div>
                    </div>

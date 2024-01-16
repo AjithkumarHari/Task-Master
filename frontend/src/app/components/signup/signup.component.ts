@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { take } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth-service.service';
 import { signupRequest } from 'src/app/state/login/login.action';
 import { selectErrorMessage } from 'src/app/state/login/login.selector';
 import { UserState } from 'src/app/state/user.state';
@@ -21,8 +19,6 @@ export class SignupComponent {
 
   constructor( 
     private formBuilder : FormBuilder,
-    private authService: AuthService,
-    private router: Router,
     private store: Store<UserState>,
   ) { }
 
@@ -42,16 +38,11 @@ export class SignupComponent {
       email : this.form.value.email,
       password : this.form.value.password,
     }
-     console.log(user);
 
-      // this.authService.signup(user).subscribe((data: any)=>console.log(data));
-
-      
-      this.store.dispatch(signupRequest({user}));
-      this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
-        this.errorMessage = error;
-      });
-     
+    this.store.dispatch(signupRequest({user}));
+    this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
+      this.errorMessage = error;
+    });
     
   }
 }

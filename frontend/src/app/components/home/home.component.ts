@@ -12,14 +12,11 @@ import { Task } from 'src/app/types/Task';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  show: boolean = false;
   add: boolean = false;
-  delete: boolean = false;
-  newTask: string = '';
-  userId: any
-  
-
-  date : any
+  edit: boolean = false;
+  taskForEdit!: Task
+  userId: string = '';
+  date!: Date
   tasks: Task[] = [];
 
   constructor( private userService: UserService,  private store: Store<UserState>,){}
@@ -28,54 +25,47 @@ export class HomeComponent {
     this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => {
        this.userId = data._id
     });
-    this.userService.getTasksByUser(this.userId).subscribe((data: Task[])=>{this.tasks = data
-    })
-
-  }
-  cancel(){
-    this.show = false;
-    this.add = false;
-    this.delete = false;
-  }
-
-  showTask(date: Date){
-    // const data = this.bookings$.filter((details) => {
-    //   const bookingDate = new Date(details.bookingTime);
-    //   return bookingDate.toDateString() === date.toDateString();
-    // });
-    // this.selectedShowDay = data[0];
-    this.show = true;
-    this.add = false;
-    this.delete = false;
-  }
-  addTask(date: Date){
-    this.date = date
-    // const workerId = this.workerId;
-    // this.store.dispatch(workerBlockBooking({workerId,blockDate}));
-    this.show  = false;
-    this.add = true;
-    this.delete  = false;
+    this.getTasks()
   }
   
-  deleteTask(blockDate: Date){
-    // const workerId = this.workerId;
-    // this.store.dispatch(workerUnBlockBooking({workerId,blockDate}));
+  getTasks(){
+    this.userService.getTasksByUser(this.userId).pipe(take(1)).subscribe((data: Task[])=>this.tasks = data)
+  }
 
-    this.show  = false;
+  cancelAddBox(){
     this.add = false;
-    this.delete  = true;
+  }
+  cancelEditBox(){
+    this.edit = false;
   }
 
-  onSubmitNewTask(){
-   
-    const task: Task = {
-      userId: this.userId,
-      content: this.newTask,
-      date: this.date 
-    } 
-    console.log(task);
-    this.userService.addTask(task).subscribe()
-    this.newTask = "";  
-     
+  afterAddTask(){
+    this.getTasks()
+    this.cancelAddBox() 
   }
+
+  afterEditTask(){
+    this.getTasks()
+    this.cancelEditBox() 
+  }
+
+  addTask(date: Date){
+    this.date = date
+    this.add = true;
+  }
+  
+  deleteTask(taskId: string){
+    this.userService.deleteTaskById(taskId).pipe(take(1)).subscribe(()=>this.getTasks());
+  }
+
+  updateTask(taskId: string){
+    this.userService.updateTaskStatus(taskId).pipe(take(1)).subscribe((data:any)=>this.getTasks());
+  }
+
+  editTask(task: Task){
+    console.log(task);
+    this.taskForEdit = task
+    this.edit = true
+  }
+
 }

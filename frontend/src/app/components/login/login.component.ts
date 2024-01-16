@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { AuthService } from 'src/app/services/auth-service.service';
 import { loginRequest } from 'src/app/state/login/login.action';
 import { selectErrorMessage } from 'src/app/state/login/login.selector';
 import { UserState } from 'src/app/state/user.state';
@@ -17,8 +16,8 @@ export class LoginComponent {
   errorMessage: any = " "
  
 
-  constructor(private formBuilder : FormBuilder,
-    private authService: AuthService,
+  constructor(
+    private formBuilder : FormBuilder,
     private store: Store<UserState>,
   ){}
 
@@ -35,12 +34,10 @@ export class LoginComponent {
       email : this.form.value.email, 
       password : this.form.value.password
     }
-     console.log(credentials);
-    //  this.authService.login(credentials).subscribe((data: any)=>console.log(data));
+
     this.store.dispatch(loginRequest({credentials}))
     this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
       this.errorMessage = error  
     });
-
   }
 }

@@ -16,6 +16,12 @@ const userRouter = () => {
 
     router.post('/add-task',controller.createTask);
 
+    router.put('/update-task',controller.changeTaskStatus);
+    
+    router.put('/edit-task',controller.changeTaskContent);
+
+    router.delete('/delete-task/:taskId',controller.removeTask);
+
     return router;
 }
 
