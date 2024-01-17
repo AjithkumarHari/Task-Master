@@ -30,14 +30,19 @@ export class LoginComponent {
 
 
   onFormSubmit(){
-    const credentials: Credentials ={
-      email : this.form.value.email, 
-      password : this.form.value.password
-    }
-
-    this.store.dispatch(loginRequest({credentials}))
-    this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
-      this.errorMessage = error  
+    Object.values(this.form.controls).forEach(control => {
+      control.markAsTouched();
     });
+    if(this.form.valid){
+      const credentials: Credentials ={
+        email : this.form.value.email, 
+        password : this.form.value.password
+      }
+  
+      this.store.dispatch(loginRequest({credentials}))
+      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
+        this.errorMessage = error  
+      });
+    }
   }
 }

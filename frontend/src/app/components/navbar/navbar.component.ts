@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 })
 export class NavbarComponent {
 
+  showNavBar: boolean = false;
   @Input() userName!: string; 
   @Input() tab!: string;
   @Output() onChangeTab : EventEmitter<string> = new EventEmitter<string>();
@@ -20,12 +21,20 @@ export class NavbarComponent {
   onSelectionChange(event: any) {
     const selectedValue = event.target.value;
     if (selectedValue === 'logout') {
-      this.authService.deleteToken();
-      this.router.navigate(['/login']);
+      this.onLogout();
     } else if (selectedValue === 'profile') {
-      event.target.value = 'user'
-      this.onChangeTab.emit('profile')
+      event.target.value = 'user';
+      this.onSelectProfile();
     }
+  }
+
+  onSelectProfile(){
+    this.onChangeTab.emit('profile')
+  }
+
+  onLogout(){
+    this.authService.deleteToken();
+    this.router.navigate(['/login']);
   }
 
   onSelectHome(){

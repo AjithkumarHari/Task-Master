@@ -18,6 +18,7 @@ export class EditProfileComponent {
   name: any;
   email: any;
   form!: FormGroup;
+  errorMessage: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,6 +40,10 @@ export class EditProfileComponent {
   }
 
   onSubmit(){
+    Object.values(this.form.controls).forEach(control => {
+      control.markAsTouched();
+    });
+    if(this.form.valid){
       if(this.form.value.password==this.form.value.confPassword){
         const user: User ={
           _id: this._id,
@@ -46,12 +51,11 @@ export class EditProfileComponent {
           email: this.form.value.email,
           password:  this.form.value.password
         }
-        
-        // this.userService.updateUserDetails(user).subscribe((data: any)=>{
-        //   console.log(data);
-          
-        // })
         this.store.dispatch(editProfileRequest({user}))
+      }else{
+        this.errorMessage = 'Password Not Match'
+        setTimeout(()=>this.errorMessage='',2000)
+      }
     }
   }
 } 

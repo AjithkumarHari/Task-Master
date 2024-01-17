@@ -141,7 +141,9 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(editProfileSuccess),
             tap(()=>{
-                console.log('effect done');
+                setTimeout(()=>{
+                    window.location.reload()
+                },500)
                 this.router.navigate(['/'])
             })
         ), {

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { userAuthGuard } from './guards/user-auth.guard';
 import { NotFoundErrorComponent } from './components/not-found-error/not-found-error.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
@@ -22,8 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'serverError', component: InternalServerErrorComponent },
-  { path: "**", component: NotFoundErrorComponent },
-
+  { path: '**', component: NotFoundErrorComponent },
 ];
 
 @NgModule({

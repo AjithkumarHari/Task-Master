@@ -33,16 +33,19 @@ export class SignupComponent {
   }
 
   onFormSubmit(){
-    const user : User ={
-      name : this.form.value.name,
-      email : this.form.value.email,
-      password : this.form.value.password,
-    }
-
-    this.store.dispatch(signupRequest({user}));
-    this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
-      this.errorMessage = error;
+    Object.values(this.form.controls).forEach(control => {
+      control.markAsTouched();
     });
-    
+    if(this.form.valid){
+      const user : User ={
+        name : this.form.value.name,
+        email : this.form.value.email,
+        password : this.form.value.password,
+      }
+      this.store.dispatch(signupRequest({user}));
+      this.store.pipe(select(selectErrorMessage)).pipe(take(1)).subscribe((error) => {
+        this.errorMessage = error;
+      });
+    }
   }
 }

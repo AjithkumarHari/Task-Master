@@ -28,16 +28,12 @@ export class EditTaskComponent {
   }
 
   onSubmitNewTask(){
-    console.log('nwewe');
-    
     if(this.task._id){
       const task: Task ={
         userId: this.task._id,
         date: this.task.date,
         content: this.newTask,
       }
-      console.log(task);
-      
       this.userService.editTaskContent(this.task._id, this.newTask).pipe(take(1)).subscribe(()=>this.onCreated.emit());
     }
   }
