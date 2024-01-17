@@ -9,7 +9,7 @@ export const userDbRepository = (repository : ReturnType<UserRepositoryMongoDB>)
     
     const getUserByEmail = async (email: string) => await repository.getUserByEmail(email);
 
-    const updateUser = async (userId: string, user: User) => await repository.updateUser(userId, user);
+    const updateUser = async (user: User) => await repository.updateUser(user);
 
     return {
         getUserByEmail,

@@ -1,5 +1,6 @@
 import USER from "../models/userModel";
 import { User } from "../../../types/User";
+import mongoose from "mongoose";
 
 export const userRepositoryMongoDB = () => {
 
@@ -15,8 +16,14 @@ export const userRepositoryMongoDB = () => {
         return await USER.create(user);
     }
     
-    const updateUser =async (_id:string, user: User) => {
-        return await USER.updateOne({_id},{...user});
+    const updateUser =async (user: any) => {
+        console.log('update',user);
+        
+        return await USER.updateOne(
+            { _id: new mongoose.Types.ObjectId(user._id) },
+            { $set: { name: user.name, email: user.email } }
+        );
+
     }
 
     return {

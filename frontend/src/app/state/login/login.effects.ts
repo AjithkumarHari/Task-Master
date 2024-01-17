@@ -15,6 +15,7 @@ import { loginFailure,
     } from "./login.action";
 // import { UserService } from "../../services/user.service";
 import { AuthService } from "src/app/services/auth-service.service";
+import { UserService } from "src/app/services/user.service";
 
 @Injectable()
 
@@ -22,7 +23,7 @@ export class AuthEffects{
 
     constructor( private actions$ : Actions, 
         private authService : AuthService,
-        // private userService: UserService,
+        private userService: UserService,
         private router : Router){}
 
     login$ = createEffect(()=>
@@ -115,6 +116,39 @@ export class AuthEffects{
             dispatch: false
         }
     );
+
+    update$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(editProfileRequest),
+            switchMap(({ user }) =>
+                this.userService.updateUserDetails(user).pipe(
+                    map(res=>{
+                        let responce : any = res;
+                        if(responce.status=='success'){
+                            localStorage.setItem('user-data',JSON.stringify(responce.userData))
+                            return editProfileSuccess({ userData: responce.userData})
+                        }
+                        else{
+                            return responce;
+                        }
+                    }),
+                )
+            )
+        )
+    );
+
+    updateSuccess$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(editProfileSuccess),
+            tap(()=>{
+                console.log('effect done');
+                this.router.navigate(['/'])
+            })
+        ), {
+            dispatch : false
+        }
+    );
+
 
 
 }

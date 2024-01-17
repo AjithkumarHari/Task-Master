@@ -12,7 +12,7 @@ export class AddTaskComponent {
 
   newTask: string = '';
   @Input() date!: Date;
-  @Input() userId!: string;
+  @Input() userId!: string | undefined;
   @Output() onCancel : EventEmitter<Date> = new EventEmitter<Date>();
   @Output() onCreated : EventEmitter<string> = new EventEmitter<string>();
 
@@ -23,12 +23,14 @@ export class AddTaskComponent {
   }
 
   onSubmitNewTask(){
+    if(this.userId){
     const task: Task = {
       userId: this.userId,
       content: this.newTask,
       date: this.date 
     } 
     this.userService.addTask(task).pipe(take(1)).subscribe(()=>this.onCreated.emit());
+  }
   }
 
 }

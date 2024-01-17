@@ -1,13 +1,13 @@
 <nav class="flex   justify-between w-auto py-5 px-20">
     <div class="flex items-center ml-10">
-        <h1 class="text-white text-3xl font-semibold  hidden sm:block uppercase">Task Master</h1>
+        <h1 class="text-white text-3xl font-semibold  hidden sm:block uppercase cursor-pointer" (click)="onSelectHome()">Task Master</h1>
     </div>
   
     <div>
         <select name="name"  id="user" class="text-2xl w-28 text-end  text-white gap-3 bg-transparent outline-none" (change)="onSelectionChange($event)">
-            <option hidden class="bg-gray-900 text-end" value="user">Ajith</option>
+            <option hidden class="bg-gray-900 text-end" value="user">{{userName}}</option>
             <option class="bg-gray-900 text-xl  rounded-md text-center"  value="logout">Log out</option>
-            <option class="bg-gray-900 text-xl rounded-md text-center" value="profile">Profile</option>
+            <option class="bg-gray-900 text-xl rounded-md text-center" value="profile" >Profile</option>
         </select>
     </div>
 

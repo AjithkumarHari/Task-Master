@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { selectUserData } from 'src/app/state/login/login.selector';
 import { UserState } from 'src/app/state/user.state';
 import { Task } from 'src/app/types/Task';
+import { User } from 'src/app/types/User';
 
 @Component({
   selector: 'app-home',
@@ -15,21 +16,24 @@ export class HomeComponent {
   add: boolean = false;
   edit: boolean = false;
   taskForEdit!: Task
-  userId: string = '';
+  user!: User;
   date!: Date
   tasks: Task[] = [];
+  tab:string = 'home'
 
   constructor( private userService: UserService,  private store: Store<UserState>,){}
 
   ngOnInit(): void {
+
     this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => {
-       this.userId = data._id
+       this.user = data
     });
     this.getTasks()
   }
   
   getTasks(){
-    this.userService.getTasksByUser(this.userId).pipe(take(1)).subscribe((data: Task[])=>this.tasks = data)
+    if(this.user._id)
+    this.userService.getTasksByUser(this.user._id).pipe(take(1)).subscribe((data: Task[])=>this.tasks = data)
   }
 
   cancelAddBox(){
@@ -59,13 +63,16 @@ export class HomeComponent {
   }
 
   updateTask(taskId: string){
-    this.userService.updateTaskStatus(taskId).pipe(take(1)).subscribe((data:any)=>this.getTasks());
+    this.userService.updateTaskStatus(taskId).pipe(take(1)).subscribe(()=>this.getTasks());
   }
 
   editTask(task: Task){
-    console.log(task);
     this.taskForEdit = task
     this.edit = true
+  }
+
+  changeTab(newTab: string){
+    this.tab = newTab
   }
 
 }

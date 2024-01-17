@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { User } from 'src/app/types/User';
 
 @Component({
   selector: 'app-profile',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
+  @Input() user!: User;
+  @Output() onChangeTab : EventEmitter<string> = new EventEmitter<string>();
+
+  onSelectHome(){
+    this.onChangeTab.emit('home')
+  }
 }

@@ -7,6 +7,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { userAuthGuard } from './guards/user-auth.guard';
 import { NotFoundErrorComponent } from './components/not-found-error/not-found-error.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: 'profile', component: ProfileComponent}
+      { path: 'editProfile', component: EditProfileComponent}
     ],
     canActivate: [userAuthGuard]
   },

@@ -24,6 +24,7 @@ import { GlobalErrorHanlderService } from './services/global-error-hanlder.servi
 import { NotFoundErrorComponent } from './components/not-found-error/not-found-error.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
     TaskListComponent,
     NotFoundErrorComponent,
     InternalServerErrorComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    EditProfileComponent
   ],
   imports: [
     HttpClientModule ,

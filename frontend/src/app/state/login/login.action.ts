@@ -10,7 +10,7 @@ export const browserReload = createAction(
 
 export const editProfileRequest = createAction(
     `User Updates the Profile`,
-    props<{userId: string, user: User}>()
+    props<{user: User}>()
 )
 
 export const editProfileSuccess = createAction(

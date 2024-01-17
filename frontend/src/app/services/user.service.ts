@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Task } from '../types/Task';
 import { Observable } from 'rxjs';
+import { User } from '../types/User';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class UserService {
 
   deleteTaskById(taskId: string){
     return this.http.delete(`${this.server}/user/delete-task/${taskId}`)
+  }
+
+  updateUserDetails(user: User){
+    return this.http.put(`${this.server}/user/update-user`, { user})
   }
 }

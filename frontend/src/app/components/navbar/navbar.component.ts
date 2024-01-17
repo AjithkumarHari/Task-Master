@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service.service';
 
@@ -8,6 +8,11 @@ import { AuthService } from 'src/app/services/auth-service.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+  @Input() userName!: string; 
+  @Input() tab!: string;
+  @Output() onChangeTab : EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private router: Router,
     private authService: AuthService,
   ) {}
@@ -19,7 +24,11 @@ export class NavbarComponent {
       this.router.navigate(['/login']);
     } else if (selectedValue === 'profile') {
       event.target.value = 'user'
-      this.router.navigate(['/profile']);
+      this.onChangeTab.emit('profile')
     }
+  }
+
+  onSelectHome(){
+    this.onChangeTab.emit('home')
   }
 }

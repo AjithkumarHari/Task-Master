@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { TaskDbInterface } from "../../application/repository/taskDbRepository";
 import { TaskRepositoryMongoDB } from "../../framework/database/repository/taskDbRepository";
+import { UserDbInterface } from "../../application/repository/userDbRepository";
+import { UserRepositoryMongoDB } from "../../framework/database/repository/userDbRepository";
+import { AuthServiceInterface } from "../../application/service/authServiceInterface";
+import { AuthService } from "../../framework/service/authService";
 import AppError from "../../util/appError";
 import { Task } from "../../types/Task";
 import { addTask } from "../../application/useCase/task/addTask";
@@ -8,12 +12,20 @@ import { findTasks } from "../../application/useCase/task/findTask";
 import { deleteTask } from "../../application/useCase/task/deleteTask";
 import { updateTask } from "../../application/useCase/task/updateTask";
 import { editTask } from "../../application/useCase/task/editTask";
+import { updateUser } from "../../application/useCase/user/updateUser";
+import { User } from "../../types/User";
 
 const userController = (
     taskDbRepository: TaskDbInterface,
     taskDbRepositoryImp: TaskRepositoryMongoDB,
+    userDbRepository: UserDbInterface,
+    userDbRepositoryImp: UserRepositoryMongoDB,
+    authServiceInterface: AuthServiceInterface,
+    authServiceImp: AuthService
 ) => {
     const dbTaskRepository = taskDbRepository(taskDbRepositoryImp());
+    const dbUserRepository = userDbRepository(userDbRepositoryImp());
+    const authService = authServiceInterface(authServiceImp());
 
     const createTask = async (req: Request, res: Response) => {
         const task: Task = req.body;
@@ -86,6 +98,22 @@ const userController = (
             res.json(result);
         }
     }
+
+    const editUserDetails = async (req: Request, res: Response) => {
+        const user: User = req.body.user;
+        const result: any = await updateUser(user, dbUserRepository, authService);
+        console.log('end',result);
+        
+        if (result instanceof AppError) {
+            res.status(result.errorCode).json({
+                ...result
+            })
+        } else {
+            res.json({
+                ...result,
+            });
+        }
+    }
     
     return {
         createTask,
@@ -93,6 +121,7 @@ const userController = (
         removeTask,
         changeTaskStatus,
         changeTaskContent,
+        editUserDetails,
     }
 
 }
