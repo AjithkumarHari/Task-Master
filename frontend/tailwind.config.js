@@ -23,7 +23,7 @@ export const theme = {
       success:[ 'Sriracha', 'cursive'],
       caption:[ 'Noto Serif Devanagari', 'serif'],
       caption2:[ 'Yellowtail', 'cursiv'],
-
+      task:[ 'Poppins',' sans-serif']
     }
 
   },

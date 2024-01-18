@@ -2,25 +2,32 @@
    <div >
       <p class="text-lg font-bold"><i class="fa-solid fa-list-check px-2"></i>To-Do List</p>
       <ul class=" divide-y divide-gray-200 ">
-         <li class="pb-3 sm:py-3 " *ngFor="let task of tasks| slice: currentPage * 7 - 7 : currentPage * 7">
-            <div class="flex items-center space-x-4 rtl:space-x-reverse">
+         <li class="pb-2 sm:py-2 " *ngFor="let task of tasks| slice: currentPage * 7 - 7 : currentPage * 7">
+            <div class="flex items-center space-x-3 rtl:space-x-reverse">
                <div class=" flex justify-between items-center w-full">
-                  <div class="flex min-w-0 items-center">
-                     <p class="text-sm font-medium text-gray-900 truncate  ">
-                        {{task.content}}
-                     </p>
-                     <p *ngIf="task.isDone; else notDone" class="text-xs ml-1 px-1 rounded-sm border border-gray-400 text-gray-500 truncate  ">
+                
+                  <div class="w-full">
+                     <div class="flex items-center">
+                        <p class="text-sm w-80 font-medium text-gray-900 truncate  ">
+                           {{task.content}}
+                        </p>
+                     </div>
+                     <div class="inline-flex whitespace-nowrap justify-end  text-base text-gray-900 font-worker ">
+                        on {{ task.date | dateString}}
+                     </div>
+                  </div>
+                  <div class="mx-2">
+                     <p *ngIf="task.isDone; else notDone" class="text-xs  w-fit px-1 rounded-sm border border-gray-400 bg-gray-500 text-white whitespace-nowrap">
                         Done
                      </p>
                      <ng-template #notDone>
-                        <p class="text-xs ml-1 px-1 rounded-sm border border-gray-400 text-gray-500 truncate  ">
+                        <p class="  w-fit  text-xs ml-1 px-1 rounded-sm border border-gray-400 text-gray-500 whitespace-nowrap">
                            Not Done
                         </p>
                      </ng-template>
+
                   </div>
-                  <div class="inline-flex whitespace-nowrap items-end text-base font-semibold text-gray-900">
-                     on {{ task.date | dateString}}
-                  </div>
+                  
                   <div class="flex gap-2">
                      <div class="bg-gray-900 text-white py-1 px-2 rounded-lg" *ngIf="!task.isDone; else reDo" (click)="onUpdate(task._id)">
                         <i class="fa-solid fa-check"></i>
@@ -43,8 +50,6 @@
       </ul>
    </div>
    
-   
-
    <div *ngIf="tasks.length>7">
       <nav class="flex justify-center mb-2" aria-label="Page navigation example">
          <ul class="inline-flex items-center -space-x-px text-base h-10">
