@@ -17,8 +17,6 @@ export const userRepositoryMongoDB = () => {
     }
     
     const updateUser =async (user: any) => {
-        console.log('update',user);
-        
         return await USER.updateOne(
             { _id: new mongoose.Types.ObjectId(user._id) },
             { $set: { name: user.name, email: user.email } }

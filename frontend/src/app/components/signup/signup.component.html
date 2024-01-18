@@ -65,7 +65,6 @@
                         <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>password must be valid.</p>
                         <p class="text-center  text-red-700">{{errorMessage}}</p>
                     </div>
-
                     <p class="text-center  text-sm  ">Already have an account? <a routerLink="/login"  class="font-semibold text-yellow-950">Click Here</a></p>
                     <div >
                         <button class="w-full py-3 text-center text-white bg-[#191a28] rounded-md" (click)="onFormSubmit()" >Sign up</button>

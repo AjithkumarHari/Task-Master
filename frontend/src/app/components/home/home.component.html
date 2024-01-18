@@ -1,7 +1,7 @@
 <app-navbar [userName]="user.name" tab="tab" (onChangeTab)="changeTab($event)"></app-navbar>
-<div class="grid grid-cols-1 h-fit sm:grid-cols-2 gap-5 sm:gap-0" *ngIf="tab=='home'" >
+<div class="grid grid-cols-1 h-full sm:grid-cols-2 gap-5 sm:gap-0" *ngIf="tab=='home'" >
     <app-calendar (onAddTask)="addTask($event)"></app-calendar>   
-    <div>
+    <div class="h-full">
         <div class="flex justify-center items-center">
             <div *ngIf="add">
                 <app-add-task [date]="date" [userId]="user._id" (onCancel)="cancelAddBox()" (onCreated)="afterAddTask()"></app-add-task>

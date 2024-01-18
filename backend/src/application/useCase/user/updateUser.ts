@@ -10,6 +10,8 @@ export const updateUser = async (
     authService: ReturnType<AuthServiceInterface>
     ) => {
     try {
+            console.log(user);
+            
             if(user.password && user._id){
             user.password = await authService.encryptPassword(user.password);
             await userRepository.updateUser(user);
