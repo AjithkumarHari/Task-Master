@@ -21,10 +21,9 @@ const userAuthMiddle = (req: Request, res: Response ,next: NextFunction) => {
         }
         
     } catch (error) {
-        console.log(error,'error from middleware');
+        console.log(error,'error from authentication');
         
     }
-    
    
 }
 

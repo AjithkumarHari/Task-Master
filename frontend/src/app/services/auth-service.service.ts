@@ -14,7 +14,7 @@ export class AuthService {
   constructor(  private http: HttpClient ) { }
 
   signup(user: User){
-    return this.http.post(`${this.server}/auth/user-signup`, user);
+    return this.http.post(`${this.server}/auth/user-signup`,user);
   }
 
   login(credentials: Credentials){

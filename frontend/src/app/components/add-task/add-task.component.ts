@@ -16,7 +16,7 @@ export class AddTaskComponent {
   @Output() onCancel : EventEmitter<Date> = new EventEmitter<Date>();
   @Output() onCreated : EventEmitter<string> = new EventEmitter<string>();
 
-  constructor( private userService: UserService){}
+  constructor( private userService: UserService ){}
 
   onClickCancel(){
     this.onCancel.emit()
@@ -24,13 +24,13 @@ export class AddTaskComponent {
 
   onSubmitNewTask(){
     if(this.userId){
-    const task: Task = {
-      userId: this.userId,
-      content: this.newTask,
-      date: this.date 
-    } 
-    this.userService.addTask(task).pipe(take(1)).subscribe(()=>this.onCreated.emit());
-  }
+      const task: Task = {
+        userId: this.userId,
+        content: this.newTask,
+        date: this.date 
+      } 
+      this.userService.addTask(task).pipe(take(1)).subscribe(()=>this.onCreated.emit());
+    }
   }
 
 }

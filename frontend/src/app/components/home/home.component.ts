@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
-import { selectUserData } from 'src/app/state/login/login.selector';
+import { selectUserData } from 'src/app/state/user.selector';
 import { UserState } from 'src/app/state/user.state';
 import { Task } from 'src/app/types/Task';
 import { User } from 'src/app/types/User';
@@ -13,6 +13,7 @@ import { User } from 'src/app/types/User';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
   add: boolean = false;
   edit: boolean = false;
   taskForEdit!: Task
@@ -21,19 +22,16 @@ export class HomeComponent {
   tasks: Task[] = [];
   tab:string = 'home'
 
-  constructor( private userService: UserService,  private store: Store<UserState>,){}
+  constructor( private userService: UserService,  private store: Store<UserState> ){}
 
   ngOnInit(): void {
-
-    this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => {
-       this.user = data
-    });
-    this.getTasks()
+    this.store.pipe(select(selectUserData)).pipe(take(1)).subscribe((data) => this.user = data );
+    this.getTasks();
   }
   
   getTasks(){
     if(this.user._id)
-    this.userService.getTasksByUser(this.user._id).pipe(take(1)).subscribe((data: Task[])=>this.tasks = data)
+    this.userService.getTasksByUser(this.user._id).pipe(take(1)).subscribe((data: Task[])=>this.tasks = data);
   }
 
   cancelAddBox(){
@@ -44,17 +42,17 @@ export class HomeComponent {
   }
 
   afterAddTask(){
-    this.getTasks()
-    this.cancelAddBox() 
+    this.getTasks();
+    this.cancelAddBox();
   }
 
   afterEditTask(){
-    this.getTasks()
-    this.cancelEditBox() 
+    this.getTasks();
+    this.cancelEditBox();
   }
 
   addTask(date: Date){
-    this.date = date
+    this.date = date;
     this.add = true;
   }
   
@@ -67,12 +65,12 @@ export class HomeComponent {
   }
 
   editTask(task: Task){
-    this.taskForEdit = task
-    this.edit = true
+    this.taskForEdit = task;
+    this.edit = true;
   }
 
   changeTab(newTab: string){
-    this.tab = newTab
+    this.tab = newTab;
   }
 
 }

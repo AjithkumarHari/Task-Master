@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserState } from './state/user.state';
-import { browserReload } from './state/login/login.action';
+import { browserReload } from './state/user.action';
 
 @Component({
   selector: 'app-root',

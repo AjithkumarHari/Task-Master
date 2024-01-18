@@ -1,6 +1,6 @@
 <main class="fixed inset-0 flex  items-center bg-black/50 justify-center overflow-hidden overscroll-contain transition-all duration-200 ease-in-out">
-    <div class=" w-fit h-fit bg-white rounded-lg  p-5 ">
-        <div class=" relative ">
+    <div class="w-fit h-fit bg-white rounded-lg  p-5 ">
+        <div class="relative ">
             <h1 class="font-semibold text-xl text-center">Edit Task</h1>
             <p class="text-lg text-center font-worker text-gray-600"> on {{task.date | dateString}}</p>
             <div class="absolute top-0 right-0 h-fit text-red-500" (click)="onClickCancel()">
@@ -12,10 +12,9 @@
                 </svg>
             </div>
         </div>
-
         <div class=" flex justify-center my-5">
             <input [(ngModel)]="newTask" type="text" name="task" id="task" class="border-2 mr-3 w-60 outline-none py-1 pl-2 border-gray-600 rounded-md">
-            <button class="bg-gray-900 py-2 px-4 rounded-md text-white" (click)="onSubmitNewTask()">UPDATE</button>
+            <button class="bg-gray-900 py-2 px-4 rounded-md text-white" (click)="onSubmitEditedTask()">UPDATE</button>
         </div>
     </div>
 </main>

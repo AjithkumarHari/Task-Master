@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
-import { UserState } from '../user.state';
+import { UserState } from './user.state';
 
 export const selectErrorMessage = createSelector(
-    (state: any) => state.errorMessage,
+    (state: any) => state.user.errorMessage,
     (errorMessage) => errorMessage
 ) 
 

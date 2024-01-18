@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { of } from "rxjs";
 import { Router } from "@angular/router";
@@ -12,8 +11,7 @@ import { loginFailure,
     signupSuccess,
     editProfileRequest,
     editProfileSuccess
-    } from "./login.action";
-// import { UserService } from "../../services/user.service";
+    } from "./user.action";
 import { AuthService } from "src/app/services/auth-service.service";
 import { UserService } from "src/app/services/user.service";
 
@@ -33,12 +31,16 @@ export class AuthEffects{
                 this.authService.login(credentials).pipe(
                     map(res=>{
                         let response : any = res;
+                        console.log(response);
+                        
                         if(response.status=='success'){
                             localStorage.setItem('user-token',response.token)
                             localStorage.setItem('user-data',JSON.stringify(response.userData))
                             return loginSuccess({userToken : response.token, userData: response.userData})
                         }
                         else{
+                            console.log('login error');
+                            
                             return loginFailure({ error : response.error.error  })
                         }
                     }),
@@ -64,7 +66,9 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(loginFailure),
             tap(()=>{
-                this.router.navigate(['/auth/login'])
+                console.log('llogin error');
+                
+                this.router.navigate(['/login'])
             })
         ), {
             dispatch: false
@@ -79,11 +83,18 @@ export class AuthEffects{
                 this.authService.signup(user).pipe(
                     map(res=>{
                         let response : any = res;
+                        console.log('in effects',response);
+                        
                         if(response.status=='success'){
+                            console.log(response.status);
+                            
                             localStorage.setItem('user-token',response.token)
                             localStorage.setItem('user-data',JSON.stringify(response.userData))
-                            return signupSuccess({userData : response.userData})
-                        }else{
+                            return signupSuccess({userToken : response.token, userData: response.userData})
+                        }
+                        else{
+                            console.log('signup error');
+                            
                             return signupFailure({ error : response.error.error  })
                         }
                     }),
@@ -110,7 +121,9 @@ export class AuthEffects{
         this.actions$.pipe(
             ofType(signupFailure),
             tap(()=>{
-                this.router.navigate(['/auth/signup'])
+                console.log('sign up faliure');
+                
+                this.router.navigate(['/signup'])
             })
         ), {
             dispatch: false

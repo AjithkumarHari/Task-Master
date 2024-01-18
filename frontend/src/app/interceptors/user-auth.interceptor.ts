@@ -30,13 +30,11 @@ export class UserAuthInterceptor implements HttpInterceptor {
         console.warn(
           'the interceptor has caught an responce',
         );
- 
         if(res.status==404){
           this.router.navigate(['/**']);
         }
         if(res.status==401){
           console.log('unautherized');
-          
         }
         return throwError(() => res);
       })

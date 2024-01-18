@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { loginRequest } from 'src/app/state/login/login.action';
-import { selectErrorMessage } from 'src/app/state/login/login.selector';
+import { loginRequest } from 'src/app/state/user.action';
+import { selectErrorMessage } from 'src/app/state/user.selector';
 import { UserState } from 'src/app/state/user.state';
 import { Credentials } from 'src/app/types/Credentials';
 
@@ -13,8 +13,7 @@ import { Credentials } from 'src/app/types/Credentials';
 })
 export class LoginComponent {
   form!: FormGroup;
-  errorMessage: any = " "
- 
+  errorMessage: any = "";
 
   constructor(
     private formBuilder : FormBuilder,
@@ -28,7 +27,6 @@ export class LoginComponent {
     })
   }
 
-
   onFormSubmit(){
     Object.values(this.form.controls).forEach(control => {
       control.markAsTouched();
@@ -38,11 +36,8 @@ export class LoginComponent {
         email : this.form.value.email, 
         password : this.form.value.password
       }
-  
       this.store.dispatch(loginRequest({credentials}))
-      this.store.pipe(select(selectErrorMessage)).subscribe((error) => {
-        this.errorMessage = error  
-      });
+      this.store.pipe(select(selectErrorMessage)).subscribe((error) => this.errorMessage = error);
     }
   }
 }

@@ -20,6 +20,8 @@ const authController = (
 
         const user: User = req.body;
         const result: any = await userSignup(user, dbUserRepository, authService);
+        console.log(result);
+        
         if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result

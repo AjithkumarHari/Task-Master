@@ -1,58 +1,50 @@
-<main class="fixed inset-0 flex  items-center bg-black/50 justify-center overflow-hidden overscroll-contain transition-all duration-200 ease-in-out">
-    <div class="py-28 sm:py-4 w-full h-screen sm:w-1/2     sm:h-fit xs:w-full bg-white shadow-2xl rounded-xl">
+<main class="fixed inset-0 flex items-center bg-black/50 justify-center overflow-hidden overscroll-contain transition-all duration-200 ease-in-out">
+    <div class="py-28 sm:py-4 w-full h-screen sm:w-1/2 sm:h-fit xs:w-full bg-white shadow-2xl rounded-xl">
         <h1 class="ml-10 font-semibold text-2xl">User Details</h1>
-       
         <div class="mx-7">
-            <form [formGroup]="form"   class="">
-                <div  class='grid grid-cols-2 gap-4 mt-7'>
+            <form [formGroup]="form">
+                <div class='grid grid-cols-2 gap-4 mt-7'>
                     <div> 
                         <div class="relative">
-                            <input type="text" id="floating_outlined_1" 
+                            <input type="text"
                             formControlName="name" 
-                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
-                            
-                            />
+                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0 peer"/>
                             <label for="floating_outlined_1" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                             
-                            >Name</label>
+                                class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+                                Name
+                            </label>
                         </div>
-                         <p *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Name must be valid(eg: A-z)</p> 
+                        <p *ngIf="!form.get('name')?.valid && !form.get('name')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Name must be valid(eg: A-z)</p> 
                     </div>
                     <div> 
                         <div class="relative">
-                            <input type="text" id="floating_outlined_1" 
+                            <input type="text"
                             formControlName="email" 
-                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
-                            
-                            />
+                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0 peer"/>
                             <label for="floating_outlined_1" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                             
-                            >e-mail</label>
+                                class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+                                e-mail
+                            </label>
                         </div>
-                          <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p> 
+                        <p *ngIf="!form.get('email')?.valid && !form.get('email')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>email must be valid(eg: xxx@gmail.com)</p> 
                     </div>
                     <div> 
                         <div class="relative">
-                            <input type="text" id="floating_outlined_1" 
+                            <input type="password"
                             formControlName="password" 
-                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
-                            
-                            />
+                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0 peer"/>
                             <label for="floating_outlined_1" 
-                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                             
-                            >Password</label>
+                            class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+                                Password
+                            </label>
                         </div>
                         <p *ngIf="!form.get('password')?.valid && !form.get('password')?.untouched"  class="mt-2 text-xs text-red-600 "> <span class="font-medium">Oh, snapp! </span>Password must be valid(eg: x34@2#om)</p> 
                     </div>
                     <div> 
                         <div class="relative">
-                            <input type="text" id="floating_outlined_1" 
+                            <input type="password"
                             formControlName="confPassword"
-                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0  peer " placeholder=" " 
-                            />
+                            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900  bg-transparent rounded-lg border border-gray-500 appearance-none  focus:outline-none focus:ring-0 peer"/>
                             <label for="floating_outlined_1" 
                             class="absolute text-sm rounded-2xl  duration-300 transform -translate-y-4 scale-75 top-0 z-10 origin-[0] bg-transparent  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:-top-0.5 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                             >Password</label>

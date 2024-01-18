@@ -41,7 +41,7 @@ export const signupRequest = createAction(
 
 export const signupSuccess = createAction(
     `Auth Signup Success`,
-    props<{userData: any}>()
+    props<{userToken: string, userData: any}>()
 )
 
 export const signupFailure = createAction(

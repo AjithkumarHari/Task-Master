@@ -14,9 +14,7 @@ export class NavbarComponent {
   @Input() tab!: string;
   @Output() onChangeTab : EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private router: Router,
-    private authService: AuthService,
-  ) {}
+  constructor(private router: Router, private authService: AuthService ) {}
 
   onSelectionChange(event: any) {
     const selectedValue = event.target.value;

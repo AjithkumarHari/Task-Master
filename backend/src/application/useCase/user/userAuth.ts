@@ -35,7 +35,6 @@ export const userLogin = async (
 ) => {
     try{
         const user: User | null = await userRepository.getUserByEmail(userEmail);
- 
         if(!user){
             throw new AppError("User not exists",HttpStatus.UNAUTHORIZED);
         }

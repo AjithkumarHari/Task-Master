@@ -31,8 +31,6 @@ export class CalendarComponent {
   @Input() tasks!: any[];
   @Output() onAddTask : EventEmitter<Date> = new EventEmitter<Date>();
 
-  constructor( ){}
-  
   ngOnInit(): void {
     this.initDate();
     this.getNoOfDays();
@@ -74,7 +72,6 @@ export class CalendarComponent {
     }
     this.getNoOfDays();
   }
-
 
   getDateValue(date: any): void {
     this.selectedDate = new Date(this.year, this.month, date);

@@ -9,6 +9,7 @@ import { Task } from 'src/app/types/Task';
   styleUrls: ['./edit-task.component.css']
 })
 export class EditTaskComponent {
+  
   newTask: string = '';
   @Input() task!: Task;
   @Output() onCancel : EventEmitter<Date> = new EventEmitter<Date>();
@@ -27,14 +28,10 @@ export class EditTaskComponent {
     this.onCancel.emit()
   }
 
-  onSubmitNewTask(){
+  onSubmitEditedTask(){
     if(this.task._id){
-      const task: Task ={
-        userId: this.task._id,
-        date: this.task.date,
-        content: this.newTask,
-      }
       this.userService.editTaskContent(this.task._id, this.newTask).pipe(take(1)).subscribe(()=>this.onCreated.emit());
     }
   }
+
 }

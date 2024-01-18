@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserService } from 'src/app/services/user.service';
-import { editProfileRequest } from 'src/app/state/login/login.action';
+import { editProfileRequest } from 'src/app/state/user.action';
 import { UserState } from 'src/app/state/user.state';
 import { User } from 'src/app/types/User';
 
@@ -23,7 +22,6 @@ export class EditProfileComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private userService: UserService,
     private store: Store<UserState>,
   ){}
 

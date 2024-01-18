@@ -55,6 +55,5 @@ export class TaskListComponent {
   onEdit(task: Task){
     this.onEditTask.emit(task)
   }
- 
 
 }

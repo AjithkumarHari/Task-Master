@@ -10,8 +10,8 @@ import { Task } from "../../types/Task";
 import { addTask } from "../../application/useCase/task/addTask";
 import { findTasks } from "../../application/useCase/task/findTask";
 import { deleteTask } from "../../application/useCase/task/deleteTask";
-import { updateTask } from "../../application/useCase/task/updateTask";
-import { editTask } from "../../application/useCase/task/editTask";
+import { updateTaskStatus } from "../../application/useCase/task/updateTask";
+import { updateTaskContent } from "../../application/useCase/task/updateTask";
 import { updateUser } from "../../application/useCase/user/updateUser";
 import { User } from "../../types/User";
 
@@ -59,7 +59,7 @@ const userController = (
 
     const changeTaskStatus = async (req: Request, res: Response) => {
         const taskId: string = req.body.taskId;
-        const result: any = await updateTask(taskId, dbTaskRepository);
+        const result: any = await updateTaskStatus(taskId, dbTaskRepository);
         if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result
@@ -74,7 +74,7 @@ const userController = (
     
     const changeTaskContent = async (req: Request, res: Response) => {
         const {taskId, newContent} = req.body;
-        const result: any = await editTask(taskId, newContent, dbTaskRepository);
+        const result: any = await updateTaskContent(taskId, newContent, dbTaskRepository);
         if (result instanceof AppError) {
             res.status(result.errorCode).json({
                 ...result
