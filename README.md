@@ -1,4 +1,4 @@
-<h1 align="center" id="title"><img src="/frontend/src/assets/logo.png" alt="angular" width="30" height="30"/>taskmaster</h1>
+<h1 align="center" id="title"><img src="/frontend/src/assets/logo.png" alt="angular" width="40" height="40"/>taskmaster</h1>
 <p id="description">taskmaster is a To-Do list web appication. The backend of this project utilizes Node.js (v20.6.1) with the Express framework (v4.18.2), following a clean architecture approach. It interfaces with a MongoDB database. The frontend is built using Angular 16.
 </p>
 <p align="center"> 
