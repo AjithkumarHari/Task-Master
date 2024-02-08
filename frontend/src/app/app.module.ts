@@ -43,7 +43,7 @@ import { UserAuthInterceptor } from './interceptors/user-auth.interceptor';
     NotFoundErrorComponent,
     InternalServerErrorComponent,
     EditTaskComponent,
-    EditProfileComponent
+    EditProfileComponent,
   ],
   imports: [
     HttpClientModule ,

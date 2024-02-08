@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  server = environment.serverUrl;
+  private server = environment.serverUrl;
 
   constructor(  private http: HttpClient ) { }
 
@@ -21,15 +21,15 @@ export class AuthService {
     return this.http.post(`${this.server}/auth/user-login`,credentials);
   }
 
-  setToken(token: string){
+  setToken(token: string): void{
     return window.localStorage.setItem('user-token',token);
   }
 
-  getToken(){
+  getToken(): string | null{
     return window.localStorage.getItem('user-token');
   }
   
-  deleteToken(){
+  deleteToken(): void{
     window.localStorage.removeItem('user-token');
     window.localStorage.removeItem('user-data');
   }

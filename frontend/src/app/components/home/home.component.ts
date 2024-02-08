@@ -16,11 +16,11 @@ export class HomeComponent {
 
   add: boolean = false;
   edit: boolean = false;
-  taskForEdit!: Task
+  taskForEdit!: Task;
   user!: User;
-  date!: Date
+  date!: Date;
   tasks: Task[] = [];
-  tab:string = 'home'
+  tab:string = 'home';
 
   constructor( private userService: UserService,  private store: Store<UserState> ){}
 

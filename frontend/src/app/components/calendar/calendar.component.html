@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center pt-10">
-    <div class="bg-gray-100 rounded-lg shadow py-4 px-7 w-10/12  "  >
+    <div class="bg-gray-100 rounded-lg shadow py-3 px-7 w-8/12  "  >
         <div class="flex justify-between items-center mb-2">
             <div>
                 <span class="text-3xl font-bold text-gray-800">{{MONTH_NAMES[month]}}</span>
@@ -22,7 +22,7 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-wrap mb-7 -mx-1">
+        <div class="flex flex-wrap mb-5 -mx-1">
             <ng-container *ngFor="let day of DAYS; let index = index">
                 <div style="width: 14.26%" class="px-1">
                     <div class="text-gray-800 font-medium text-center text-lg">
@@ -31,12 +31,12 @@
                 </div>
             </ng-container>
         </div>
-        <div class="flex flex-wrap m-2">
+        <div class="flex flex-wrap m-1">
             <ng-container *ngFor="let blankday of blankdays">
                 <div style="width: 14.28%" class="text-center border-none p-1 border-transparent text-sm"></div>
             </ng-container>
             <ng-container *ngFor=" let date of no_of_days; let dateIndex = index; trackBy: trackByIdentity">
-                <div style="width: 14.28%" class=" px-2 py-1">
+                <div style="width: 14.28%" class="pl-1">
                     <div (click)="getDateValue(date)"
                     appDate [date]="date" [year]="year" [month]="month" [tasks]="tasks" [selectedDate]="selectedDate"
                     class="cursor-pointer p-1 text-center text-black text-xl rounded-xl leading-loose transition ease-in-out duration-100">

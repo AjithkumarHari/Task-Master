@@ -10,7 +10,7 @@ import { User } from '../types/User';
 })
 export class UserService {
 
-  server = environment.serverUrl;
+  private server = environment.serverUrl;
 
   constructor(  private http: HttpClient ) { }
 
